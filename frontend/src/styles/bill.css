@@ -1,0 +1,91 @@
+.bill-container{
+
+padding:30px;
+
+display:flex;
+
+justify-content:center;
+
+}
+
+.bill-card{
+
+width:650px;
+
+background:white;
+
+padding:40px;
+
+border-radius:15px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+}
+
+.bill-card h1{
+
+text-align:center;
+
+margin-bottom:20px;
+
+color:#2563EB;
+
+}
+
+.bill-card p{
+
+margin:12px 0;
+
+font-size:17px;
+
+}
+
+.bill-card h2{
+
+text-align:right;
+
+margin-top:20px;
+
+color:#16A34A;
+
+}
+@media print {
+
+.sidebar,
+.navbar{
+display:none;
+}
+
+.bill-card{
+box-shadow:none;
+width:100%;
+}
+
+}
+@media print {
+
+    body * {
+        visibility: hidden;
+    }
+
+    .bill-card,
+    .bill-card * {
+        visibility: visible;
+    }
+
+    .bill-card {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        box-shadow: none;
+        border: none;
+    }
+
+    .sidebar,
+    .navbar,
+    button {
+        display: none !important;
+    }
+
+}

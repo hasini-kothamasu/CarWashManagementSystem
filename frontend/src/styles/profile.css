@@ -1,0 +1,32 @@
+.profile-container{
+    padding:20px;
+    display:flex;
+    justify-content:center;
+}
+
+.profile-card{
+    width:700px;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.profile-card h2{
+    margin-bottom:15px;
+    color:#2563EB;
+}
+
+.profile-card p{
+    margin:18px 0;
+    font-size:17px;
+    line-height:1.6;
+}
+
+@media(max-width:768px){
+
+.profile-card{
+    width:100%;
+}
+
+}

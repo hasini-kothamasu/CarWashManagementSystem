@@ -1,0 +1,49 @@
+.expense-container{
+    padding:20px;
+}
+
+.expense-card{
+
+    max-width:700px;
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.expense-card h2{
+    margin-bottom:20px;
+}
+
+.expense-card .form-group{
+    margin-bottom:20px;
+}
+
+.expense-card input,
+.expense-card select,
+.expense-card textarea{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #CBD5E1;
+
+    border-radius:10px;
+
+    font-size:15px;
+}
+
+.expense-card input:focus,
+.expense-card select:focus,
+.expense-card textarea:focus{
+
+    outline:none;
+
+    border-color:#2563EB;
+}
