@@ -20,12 +20,18 @@ const [vehicleNumber, setVehicleNumber] = useState("");
 const [brand, setBrand] = useState("Maruti Suzuki");
 const [model, setModel] = useState("");
 const [category, setCategory] = useState("Small Car");
+const [customCategory, setCustomCategory] = useState("");
+const [customPrice, setCustomPrice] = useState("");
 const [quantity, setQuantity] = useState(1);
 
 const [payment, setPayment] = useState("Cash");
 const [notes, setNotes] = useState("");
+const unitPrice =
+  category === "Custom"
+    ? Number(customPrice) || 0
+    : prices[category];
 
-const vehicleAmount = prices[category] * quantity;
+const vehicleAmount = unitPrice * quantity;
 const interiorAmount = interior ? 100 * quantity : 0;
 const totalAmount = vehicleAmount + interiorAmount;
 const clearForm = () => {
@@ -35,13 +41,29 @@ const clearForm = () => {
   setBrand("Maruti Suzuki");
   setModel("");
   setCategory("Small Car");
+  setCustomCategory("");
+  setCustomPrice("");
   setQuantity(1);
   setInterior(false);
   setPayment("Cash");
   setNotes("");
 };
 const saveWash = async () => {
+  if (category === "Custom") {
+  if (!customCategory.trim()) {
+    alert("Enter Custom Category Name");
+    return;
+  }
 
+  if (
+    customPrice.trim() === "" ||
+    !Number.isFinite(Number(customPrice)) ||
+    Number(customPrice) < 0
+  ) {
+    alert("Enter a valid Custom Price");
+    return;
+  }
+}
     if (!customerName.trim()) {
         alert("Enter Customer Name");
         return;
@@ -68,7 +90,7 @@ const saveWash = async () => {
         vehicleNumber,
         brand,
         model,
-        category,
+        category: category === "Custom" ? customCategory.trim() : category,
         quantity,
         interior,
         payment,
@@ -207,14 +229,41 @@ time: new Date().toTimeString().split(" ")[0]
       <label>Category</label>
 
       <select
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-      >
-        <option>Bike</option>
-        <option>Small Car</option>
-        <option>Medium Car</option>
-        <option>Large Car</option>
-      </select>
+  value={category}
+  onChange={(e) => setCategory(e.target.value)}
+>
+  <option>Bike</option>
+  <option>Small Car</option>
+  <option>Medium Car</option>
+  <option>Large Car</option>
+  <option value="Custom">Custom</option>
+</select>
+
+{category === "Custom" && (
+  <>
+    <div className="form-group">
+      <label>Custom Category Name</label>
+      <input
+        type="text"
+        value={customCategory}
+        onChange={(e) => setCustomCategory(e.target.value)}
+        placeholder="e.g. SUV, Van"
+      />
+    </div>
+
+    <div className="form-group">
+      <label>Price per Vehicle (₹)</label>
+      <input
+        type="number"
+        min="0"
+        step="0.01"
+        value={customPrice}
+        onChange={(e) => setCustomPrice(e.target.value)}
+        placeholder="Enter price"
+      />
+    </div>
+  </>
+)}
 
     </div>
 
@@ -299,7 +348,16 @@ time: new Date().toTimeString().split(" ")[0]
 
 <div className="bill-row">
   <span>Vehicle Type</span>
-  <span>{category}</span>
+  <span>
+    {category === "Custom"
+      ? customCategory.trim() || "Custom"
+      : category}
+  </span>
+</div>
+
+<div className="bill-row">
+  <span>Price per Vehicle</span>
+  <span>₹{unitPrice}</span>
 </div>
 
 <div className="bill-row">

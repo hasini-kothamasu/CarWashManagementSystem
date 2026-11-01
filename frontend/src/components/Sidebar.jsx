@@ -10,6 +10,7 @@ import {
   FaCog,
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import carWashLogo from "../assets/abhi-car-wash.png";
 const menuItems = [
   { icon: <FaHome />, title: "Dashboard", path: "/" },
   { icon: <FaCar />, title: "New Wash", path: "/newwash" },
@@ -26,9 +27,13 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className="logo">
-        🚗
-        <h4>Abhi Car Wash</h4>
-      </div>
+  <img
+    src={carWashLogo}
+    alt="Abhi Car Wash Logo"
+    className="sidebar-logo-image"
+  />
+  <h4>ABHI CAR WASH</h4>
+</div>
 
    <ul className="menu">
   {menuItems.map((item, index) => (
